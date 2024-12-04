@@ -12,10 +12,10 @@ class App extends Component {
 }
 
   componentDidMount() {
-    this.getCoordinatesWithFetch;
+    this.getCoordinatesWithFetch();
   }
 
-  getCoordinatesFetch = async () => {
+  getCoordinatesWithFetch = async () => {
     let apiKey = process.env.REACT_APP_WEATHER_API_KEY;
     let city = "Canton";
     let url = "http://api.openweathermap.org/geo/1.0/direct"
@@ -38,6 +38,8 @@ class App extends Component {
     }
   }
 
+
+  
   render() {
     return (
       <div className="App">
