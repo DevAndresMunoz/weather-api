@@ -40,7 +40,7 @@ class App extends Component {
   getWeatherWithFetch = async (data) => {
     let url = "https://api.openweathermap.org/data/2.5/weather";
     try {
-      let res = await fetch(`${url}?lat=${this.state.lat}&lon=${this.state.lon}&appid=${this.state.apiKey}`)
+      let res = await fetch(`${url}?lat=${data.lat}&lon=${data.lon}&appid=${this.state.apiKey}`)
       if (!res.ok) {
         throw new Error(`Error: ${res.status} - ${res.statusText}`)
       }
