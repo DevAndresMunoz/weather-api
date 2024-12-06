@@ -25,30 +25,22 @@ class App extends Component {
     let url = "http://api.openweathermap.org/geo/1.0/direct"
 
     try {
-      let res = await fetch(`${url}?q=${this.state.city}&appid=${this.state.apiKey}`)
-      if (!res.ok) {
-        throw new Error(`Error: ${res.status} - ${res.statusText}`)
-      }
+      let res = await axios.get(`${url}?q=${this.state.city}&appid=${this.state.apiKey}`);
+      console.log(res.data);
+      return res.data;
 
-      let data = await res.json();
-      return data;
-
-    } catch (error) {
-        console.log(error.message);
+    } catch (err) {
+        console.log(err.message);
     }
   }
 
   getWeatherWithFetch = async (data) => {
     let url = "https://api.openweathermap.org/data/2.5/weather";
     try {
-      let res = await fetch(`${url}?lat=${data.lat}&lon=${data.lon}&appid=${this.state.apiKey}`)
-      if (!res.ok) {
-        throw new Error(`Error: ${res.status} - ${res.statusText}`)
-      }
+      let res = await axios.get(`${url}?lat=${data.lat}&lon=${data.lon}&appid=${this.state.apiKey}`)
 
-      let weather = await res.json();
-      console.log(weather.weather[0]);
-      return weather.weather[0];
+      console.log(res.data.weather[0]);
+      return res.data.weather[0];
 
     } catch (error) {
         console.log(error.message)
