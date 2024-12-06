@@ -1,5 +1,6 @@
-import './App.css';
 import React, {Component} from "react";
+import './App.css';
+import axios from 'axios';
 
 
 class App extends Component {
@@ -22,7 +23,7 @@ class App extends Component {
 
   getCoordinatesWithFetch = async () => {
     let url = "http://api.openweathermap.org/geo/1.0/direct"
-    
+
     try {
       let res = await fetch(`${url}?q=${this.state.city}&appid=${this.state.apiKey}`)
       if (!res.ok) {
