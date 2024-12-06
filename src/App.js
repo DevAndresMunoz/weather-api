@@ -8,7 +8,7 @@ class App extends Component {
     this.state = {
         apiKey: process.env.REACT_APP_WEATHER_API_KEY,
         city: "Canton",
-        weatherData: [],
+        weatherData: ""
     }
 }
 
@@ -46,7 +46,8 @@ class App extends Component {
       }
 
       let weather = await res.json();
-      console.log(weather);
+      console.log(weather.weather[0]);
+      return weather.weather[0];
 
     } catch (error) {
         console.log(error.message)
@@ -59,8 +60,9 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Weather App</h1>
-        <p>{`API KEY: ${process.env.REACT_APP_WEATHER_API_KEY}`}</p>
-        <p>{`Lat: `}</p>
+        <p>{`City: ${this.state.city}`}</p>
+        <p>{`Weather: ${this.state.weatherData.main}`}</p>
+        
       </div>
     );
   }
