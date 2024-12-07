@@ -28,7 +28,6 @@ class App extends Component {
 
     try {
       let res = await axios.get(`${url}?zip=${this.state.zipCode}&appid=${this.state.apiKey}`);
-      console.log(res.data);
       return res.data;
 
 
@@ -42,7 +41,6 @@ class App extends Component {
     try {
       let res = await axios.get(`${url}?lat=${data.lat}&lon=${data.lon}&appid=${this.state.apiKey}`)
 
-      console.log(res.data.weather[0]);
       return res.data.weather[0];
 
     } catch (error) {
