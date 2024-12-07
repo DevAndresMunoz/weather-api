@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import './App.css';
 import axios from 'axios';
-import getCoordinates from "./api";
+import apiCoordinateCall from "./api";
 
 
 class App extends Component {
@@ -25,13 +25,15 @@ class App extends Component {
     }
 
 
-
     getCoordinatesUsingZip = async () => {
-        let url = "http://api.openweathermap.org/geo/1.0/zip"
+        // let url = "http://api.openweathermap.org/geo/1.0/zip"
 
-        try {
-            let res = await axios.get(`${url}?zip=${this.state.zipCode}&appid=${this.state.apiKey}`);
-            return res.data;
+        // try {
+        //     let res = await axios.get(`${url}?zip=${this.state.zipCode}&appid=${this.state.apiKey}`);
+        //     return res.data;
+		try {
+			let res = await apiCoordinateCall.get(`zip?zip=${this.state.zipCode}&appid=${this.state.apiKey}`);
+			return res.data;
 
 
         } catch (err) {
