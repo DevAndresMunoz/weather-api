@@ -8,26 +8,29 @@ class App extends Component {
     super(props);
     this.state = {
         apiKey: process.env.REACT_APP_WEATHER_API_KEY,
-        city: "Canton",
-        weatherData: ""
+        zipCode : "80110",
+        cityName: "",
+        weatherData: "",
     }
 }
 
   async componentDidMount() {
-    const res = await this.getCoordinatesWithFetch();
-    const weather = await this.getWeatherWithFetch(res[0]);
+    const res = await this.getCoordinatesUsingZip();
+    const weather = await this.getWeatherWithFetch(res);
     this.setState({
+      cityName: res.name,
       weatherData: weather,
     })
   }
 
-  getCoordinatesWithFetch = async () => {
-    let url = "http://api.openweathermap.org/geo/1.0/direct"
+  getCoordinatesUsingZip = async () => {
+    let url = "http://api.openweathermap.org/geo/1.0/zip"
 
     try {
-      let res = await axios.get(`${url}?q=${this.state.city}&appid=${this.state.apiKey}`);
+      let res = await axios.get(`${url}?zip=${this.state.zipCode}&appid=${this.state.apiKey}`);
       console.log(res.data);
       return res.data;
+
 
     } catch (err) {
         console.log(err.message);
@@ -53,7 +56,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Weather App</h1>
-        <p>{`City: ${this.state.city}`}</p>
+        <p>{`City: ${this.state.cityName}`}</p>
         <p>{`Weather: ${this.state.weatherData.main}`}</p>
         
       </div>
