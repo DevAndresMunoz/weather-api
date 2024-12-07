@@ -1,4 +1,4 @@
-import axios from axios;
+import axios from 'axios';
 
 const apiCoordinateCall = axios.create({
     baseURL: "http://api.openweathermap.org/geo/1.0/direct",
@@ -15,7 +15,7 @@ const getCoordinates = async (endpoint) => {
     }
 };
 
-const 
+export default getCoordinates;
 
 
 
