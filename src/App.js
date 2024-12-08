@@ -1,7 +1,8 @@
 import React, {Component} from "react";
 import './App.css';
 import axios from 'axios';
-import apiCoordinateCall from "./api";
+import apiGeocode from "./geocodingAPI";
+import apiWeatherCall from "./weatherAPI";
 
 
 class App extends Component {
@@ -26,13 +27,8 @@ class App extends Component {
 
 
     getCoordinatesUsingZip = async () => {
-        // let url = "http://api.openweathermap.org/geo/1.0/zip"
-
-        // try {
-        //     let res = await axios.get(`${url}?zip=${this.state.zipCode}&appid=${this.state.apiKey}`);
-        //     return res.data;
 		try {
-			let res = await apiCoordinateCall.get(`zip?zip=${this.state.zipCode}&appid=${this.state.apiKey}`);
+			let res = await apiGeocode.get(`zip?zip=${this.state.zipCode}&appid=${this.state.apiKey}`);
 			return res.data;
 
 
@@ -42,9 +38,8 @@ class App extends Component {
     }
 
     getWeatherWithFetch = async (data) => {
-        let url = "https://api.openweathermap.org/data/2.5/weather";
         try {
-            let res = await axios.get(`${url}?lat=${data.lat}&lon=${data.lon}&appid=${this.state.apiKey}`)
+            let res = await apiWeatherCall.get(`weather?lat=${data.lat}&lon=${data.lon}&appid=${this.state.apiKey}`)
 
             return res.data.weather[0];
 
@@ -60,6 +55,7 @@ class App extends Component {
             <div className="App">
                 <h1>Weather App</h1>
                 <p>{`City: ${this.state.cityName}`}</p>
+				<p>{`Zip: ${this.state.zipCode}`}</p>
                 <p>{`Weather: ${this.state.weatherData.main}`}</p>
                 
             </div>
