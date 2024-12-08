@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import './App.css';
 import axios from 'axios';
 
+// API wrappers
 const apiGeocode = axios.create({
 	baseURL: "http://api.openweathermap.org/geo/1.0/",
 	timeout: 5000,
