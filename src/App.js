@@ -1,8 +1,16 @@
 import React, {Component} from "react";
 import './App.css';
-import apiGeocode from "./geocodingAPI";
-import apiWeatherCall from "./weatherAPI";
+import axios from 'axios';
 
+const apiGeocode = axios.create({
+	baseURL: "http://api.openweathermap.org/geo/1.0/",
+	timeout: 5000,
+});
+
+const apiWeatherCall = axios.create({
+	baseURL: "https://api.openweathermap.org/data/2.5/",
+	timeout: 5000,
+});
 
 class App extends Component {
 	constructor(props) {
@@ -19,14 +27,13 @@ class App extends Component {
     async componentDidMount() {
         const res = await this.getCoordinatesUsingZip();
         const weather = await this.getWeather(res);
-		console.log(weather.main)
+		console.log(weather)
         this.setState({
             cityName: res.name,
             weather: weather.weather[0],
 			tempData: weather.main,
         })
     }
-
 
     getCoordinatesUsingZip = async () => {
 		try {
