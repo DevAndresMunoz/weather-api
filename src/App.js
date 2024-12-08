@@ -37,7 +37,12 @@ class App extends Component {
 
     getCoordinatesUsingZip = async () => {
 		try {
-			let res = await apiGeocode.get(`zip?zip=${this.state.zipCode}&appid=${this.state.apiKey}`);
+			let res = await apiGeocode.get(`zip?`, {
+				params: {
+					zip: this.state.zipCode,
+					appid: this.state.apiKey,
+				}
+			});
 			return res.data;
 
 
@@ -48,7 +53,14 @@ class App extends Component {
 
     getWeather = async (data) => {
         try {
-            let res = await apiWeatherCall.get(`weather?lat=${data.lat}&lon=${data.lon}&units=imperial&appid=${this.state.apiKey}`)
+            let res = await apiWeatherCall.get('weather?', {
+				params: {
+					lat: data.lat,
+					lon: data.lon,
+					units: "imperial",
+					appid: this.state.apiKey,
+				}
+			});
             return res.data;
 
         } catch (error) {
