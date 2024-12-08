@@ -18,7 +18,7 @@ class App extends Component {
 
     async componentDidMount() {
         const res = await this.getCoordinatesUsingZip();
-        const weather = await this.getWeatherWithFetch(res);
+        const weather = await this.getWeather(res);
         this.setState({
             cityName: res.name,
             weatherData: weather,
@@ -37,7 +37,7 @@ class App extends Component {
         }
     }
 
-    getWeatherWithFetch = async (data) => {
+    getWeather = async (data) => {
         try {
             let res = await apiWeatherCall.get(`weather?lat=${data.lat}&lon=${data.lon}&appid=${this.state.apiKey}`)
 
