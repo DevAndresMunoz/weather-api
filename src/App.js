@@ -28,7 +28,6 @@ class App extends Component {
     async componentDidMount() {
         const res = await this.getCoordinatesUsingZip();
         const weather = await this.getWeather(res);
-		console.log(weather)
         this.setState({
             cityName: res.name,
             weather: weather.weather[0],
@@ -69,6 +68,16 @@ class App extends Component {
 
     }
 
+	testAPI = async () => {
+		try {
+			let res = await axios.get('http://localhost:5000/products')
+			console.log(res)
+			return res;
+		} catch (error) {
+			console.log(error.message)
+		}
+	}
+
     
     render() {
         return (
@@ -81,7 +90,7 @@ class App extends Component {
 				<p>{`High: ${Math.round(this.state.tempData.temp_max)}° F`}</p>
 				<p>{`Low: ${Math.round(this.state.tempData.temp_min)}° F`}</p>
 				<p>{`Humidity: ${this.state.tempData.humidity}%`}</p>
-                
+                <button onClick={this.testAPI}>Test API Request</button>
             </div>
         );
     }
