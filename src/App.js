@@ -46,7 +46,6 @@ class App extends Component {
 			});
 			return res.data;
 
-
         } catch (err) {
                 console.log(err.message);
         }
